@@ -14,7 +14,7 @@
     },
 	"autoload": {
 		"psr-4": {
-			"greeny\\ArrayClass": "src/"
+			"greeny\\ArrayClass\\": "src/"
 		}
 	}
 }
