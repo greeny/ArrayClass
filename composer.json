@@ -1,0 +1,20 @@
+{
+    "name": "greeny/array-class",
+    "description": "An objective approach to arrays",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomáš Blatný",
+            "email": "blatny.tomas@seznam.cz"
+        }
+    ],
+    "require": {
+
+    },
+	"autoload": {
+		"psr-4": {
+			"greeny\\ArrayClass": "src/"
+		}
+	}
+}
