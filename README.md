@@ -9,7 +9,6 @@ and default values.
 Lets take this code:
 
 ```php
-
 $array = [];
 array_push($array, 0, 1, 2, 3);
 shuffle($array);
@@ -18,7 +17,6 @@ $array = array_map(function ($item) {
 }, $array);
 $array = array_filter($array);
 print_r($array);
-
 ```
 
 Can you tell from first look, what the code does? Well you probably can, but the code is messy.
@@ -26,7 +24,6 @@ Can you tell from first look, what the code does? Well you probably can, but the
 However what if we rewrite the code like this:
 
 ```php
-
 $array = ArrayClass::from([])
 	->push(0, 1, 2, 3)
 	->shuffle()
@@ -37,7 +34,6 @@ $array = ArrayClass::from([])
 	->toArray();
 	
 print_r($array);
-
 ```
 
 Looks way more better, right? And quess what, it does the same thing as example above, using same functions,
@@ -46,7 +42,6 @@ but taking advantages from PHP 5's OOP; PHP 5.6's variadic arguments and other t
 One may argue that working with this class would not be the same as working with arrays, but I have solution for this too!
 
 ```php
-
 $array = ArrayClass::from([]);
 
 // you can count elements natively
@@ -61,7 +56,6 @@ foreach ($array as $key => $value) {
 $array[1] = 4;
 $array[2] = $array[3] * isset($array[4]) ? $array[4] : 4;
 unset($array[5]);
-
 ```
 
 So you do think it's everything I have for you? Wrong! Look at all these cool features built-in:
@@ -169,24 +163,19 @@ Ah, you maybe do not know, how to initialize that thing?
 Well, simply copy the `ArrayClass.php` file to your working directory and require it:
 
 ```php
-
 require_once __DIR__ . '/ArrayClass.php'; // path to the most awesome library ever
-
 ```
 
 Or install it with composer (`composer require greeny/array-class`) and use composer autoloader:
 
 
 ```php
-
 require_once __DIR__ . '/vendor/autoload.php';
-
 ```
 
 Then you can start enjoying it!
 
 ```php
-
 // import class
 use greeny\ArrayClass\ArrayClass; // yes, I know, weird namespace
 
@@ -195,7 +184,6 @@ $array = new ArrayClass($original); // initializes from original array
 $array = ArrayClass::from($original); // same as before, good for chaining methods immidiatelly, like below:
 
 $array = ArrayClass::from($original)->filter()->shuffle(); // etc etc
-
 ```
 
 ## Comming soon (maybe)
