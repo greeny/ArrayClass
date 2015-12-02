@@ -150,10 +150,17 @@ If yes, only the name of wrapped PHP function is included, parameters are the sa
 Also there are some utility methods:
 
 - `combineKeysWith` (`$values`) - equals to calling `array_combine($array, $values)`
-- `combineValuesWith` (`$keys`) = equals to calling `array_combine($keys, $array)`
+- `combineValuesWith` (`$keys`) - equals to calling `array_combine($keys, $array)`
 - `cloneArray` - returns clone of `ArrayClass`
 - `cloneRef` (`&$ref`) - returns clone of `ArrayClass`, also sets original `ArrayClass` to `$ref`
 - `toArray` - converts `ArrayClass` to native array
+
+And some static methods to start with:
+
+- `ArrayClass::combine` (`$keys, $values`) - creates new `ArrayClass` from result of `array_combine($keys, $values)`
+- `ArrayClass::fillKeys` (`$array, $value`) - creates new `ArrayClass` from result of `array_fill_keys($array, $value)`
+- `ArrayClass::fill` (`$start, $num, $value`) - creates new `ArrayClass` from result of `array_fill($start, $num, $value)` 
+- `ArrayClass::range` (`$start, $end, $step = 1`) - creates new `ArrayClass` from result of `range($start, $end, $step)` 
 
 ## So what are you waiting for?
 
@@ -163,7 +170,7 @@ Well, simply copy the `ArrayClass.php` file to your working directory and requir
 
 ```php
 
-require_once __DIR__ . '/ArrayClass.php'; // path to most awesome library ever
+require_once __DIR__ . '/ArrayClass.php'; // path to the most awesome library ever
 
 ```
 
