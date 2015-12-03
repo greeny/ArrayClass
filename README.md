@@ -66,6 +66,7 @@ So you do think it's everything I have for you? Wrong! Look at all these cool fe
 - automatic callback checking, throws exception when passed callback is not callable
 - nice and easy readable API with fluent interface
 - conversion to plain array with `toArray()` method
+- object access (`$arrayClass->foo` is same as `$arrayClass['foo']`)
 - and much more!
 
 ## Method index
@@ -148,6 +149,10 @@ Also there are some utility methods:
 - `cloneArray` - returns clone of `ArrayClass`
 - `cloneRef` (`&$ref`) - returns clone of `ArrayClass`, also sets original `ArrayClass` to `$ref`
 - `toArray` - converts `ArrayClass` to native array
+- `getIndex` (`$index`) - returns value on target index
+- `setIndex` (`$index, $value`) - sets value on target index
+- `issetIndex` (`$index`) - determines if index is set
+- `unsetIndex` (`$index`) - unsets index
 
 And some static methods to start with:
 

@@ -900,6 +900,49 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 
 
 	/**
+	 * @param mixed $index
+	 * @return mixed
+	 */
+	public function getIndex($index)
+	{
+		return $this->array[$index];
+	}
+
+
+	/**
+	 * @param mixed $index
+	 * @param mixed $value
+	 * @return $this
+	 */
+	public function setIndex($index, $value)
+	{
+		$this->array[$index] = $value;
+		return $this;
+	}
+
+
+	/**
+	 * @param mixed $index
+	 * @return bool
+	 */
+	public function issetIndex($index)
+	{
+		return isset($this->array[$index]);
+	}
+
+
+	/**
+	 * @param mixed $index
+	 * @return $this
+	 */
+	public function unsetIndex($index)
+	{
+		unset($this->array[$index]);
+		return $this;
+	}
+
+
+	/**
 	 * @param array|Traversable|ArrayClass $arg
 	 * @return array
 	 */
@@ -999,7 +1042,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function offsetExists($offset)
 	{
-		return isset($this->array[$offset]);
+		return $this->issetIndex($offset);
 	}
 
 
@@ -1009,7 +1052,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function offsetGet($offset)
 	{
-		return $this->array[$offset];
+		return $this->getIndex($offset);
 	}
 
 
@@ -1020,8 +1063,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function offsetSet($offset, $value)
 	{
-		$this->array[$offset] = $value;
-		return $this;
+		return $this->setIndex($offset, $value);
 	}
 
 
@@ -1031,8 +1073,56 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function offsetUnset($offset)
 	{
-		unset($this->array[$offset]);
-		return $this;
+		return $this->unsetIndex($offset);
 	}
+
+
+	/*
+	 * =================
+	 * = Object access =
+	 * =================
+	 */
+
+
+	/**
+	 * @param mixed $name
+	 * @param mixed $value
+	 * @return $this
+	 */
+	public function __set($name, $value)
+	{
+		return $this->setIndex($name, $value);
+	}
+
+
+	/**
+	 * @param mixed $name
+	 * @return mixed
+	 */
+	public function __get($name)
+	{
+		return $this->getIndex($name);
+	}
+
+
+	/**
+	 * @param mixed $name
+	 * @return bool
+	 */
+	public function __isset($name)
+	{
+		return $this->issetIndex($name);
+	}
+
+
+	/**
+	 * @param string $name
+	 * @return $this
+	 */
+	public function __unset($name)
+	{
+		return $this->unsetIndex($name);
+	}
+
 
 }
