@@ -69,6 +69,41 @@ So you do think it's everything I have for you? Wrong! Look at all these cool fe
 - object access (`$arrayClass->foo` is same as `$arrayClass['foo']`)
 - and much more!
 
+## So what are you waiting for?
+
+Ah, you maybe do not know, how to initialize that thing?
+
+Well, simply copy the `ArrayClass.php` file to your working directory and require it:
+
+```php
+require_once __DIR__ . '/ArrayClass.php'; // path to the most awesome library ever
+```
+
+Or install it with composer (`composer require greeny/array-class`) and use composer autoloader:
+
+
+```php
+require_once __DIR__ . '/vendor/autoload.php';
+```
+
+Then you can start enjoying it!
+
+```php
+// import class
+use greeny\ArrayClass\ArrayClass; // yes, I know, weird namespace
+
+$array = new ArrayClass; // initializes from empty array
+$array = new ArrayClass($original); // initializes from original array
+$array = ArrayClass::from($original); // same as before, good for chaining methods immidiatelly, like below:
+
+$array = ArrayClass::from($original)->filter()->shuffle(); // etc etc
+```
+
+## Comming soon (maybe)
+
+- unit tests (there **may** (but **should not**) be some not yet discovered bugs)
+- any ideas? Let me know by opening an issue!
+
 ## Method index
 
 Almost all of methods provided by `ArrayClass` just wrap some native PHP function for working with arrays.
@@ -160,38 +195,3 @@ And some static methods to start with:
 - `ArrayClass::fillKeys` (`$array, $value`) - creates new `ArrayClass` from result of `array_fill_keys($array, $value)`
 - `ArrayClass::fill` (`$start, $num, $value`) - creates new `ArrayClass` from result of `array_fill($start, $num, $value)` 
 - `ArrayClass::range` (`$start, $end, $step = 1`) - creates new `ArrayClass` from result of `range($start, $end, $step)` 
-
-## So what are you waiting for?
-
-Ah, you maybe do not know, how to initialize that thing?
-
-Well, simply copy the `ArrayClass.php` file to your working directory and require it:
-
-```php
-require_once __DIR__ . '/ArrayClass.php'; // path to the most awesome library ever
-```
-
-Or install it with composer (`composer require greeny/array-class`) and use composer autoloader:
-
-
-```php
-require_once __DIR__ . '/vendor/autoload.php';
-```
-
-Then you can start enjoying it!
-
-```php
-// import class
-use greeny\ArrayClass\ArrayClass; // yes, I know, weird namespace
-
-$array = new ArrayClass; // initializes from empty array
-$array = new ArrayClass($original); // initializes from original array
-$array = ArrayClass::from($original); // same as before, good for chaining methods immidiatelly, like below:
-
-$array = ArrayClass::from($original)->filter()->shuffle(); // etc etc
-```
-
-## Comming soon (maybe)
-
-- unit tests (there **may** (but **should not**) be some not yet discovered bugs)
-- any ideas? Let me know by opening an issue!
