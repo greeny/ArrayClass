@@ -67,22 +67,24 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	/**
 	 * @param int $size
 	 * @param bool $preserveKeys
-	 * @return ArrayClass[]
+	 * @return $this
 	 */
 	public function chunk($size, $preserveKeys = FALSE)
 	{
-		return self::convertMoreToSelf(array_chunk($this->array, $size, $preserveKeys));
+		$this->array = array_chunk($this->array, $size, $preserveKeys);
+		return $this;
 	}
 
 
 	/**
 	 * @param string $key
 	 * @param string|NULL $indexKey
-	 * @return ArrayClass
+	 * @return $this
 	 */
 	public function column($key, $indexKey = NULL)
 	{
-		return self::convertToSelf(array_column($this->array, $key, $indexKey));
+		$this->array = array_column($this->array, $key, $indexKey);
+		return $this;
 	}
 
 
@@ -103,7 +105,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function combineKeysWith($values)
 	{
-		$this->array = self::combine($this->array, $values);
+		$this->array = self::combine($this->array, $values)->toArray();
 		return $this;
 	}
 
@@ -114,7 +116,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function combineValuesWith($keys)
 	{
-		$this->array = self::combine($keys, $this->array);
+		$this->array = self::combine($keys, $this->array)->toArray();
 		return $this;
 	}
 
@@ -124,7 +126,8 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function countValues()
 	{
-		return $this->convertToSelf(array_count_values($this->array));
+		$this->array = array_count_values($this->array);
+		return $this;
 	}
 
 
@@ -134,7 +137,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function diffAssoc(...$array)
 	{
-		$this->array = call_user_func_array('array_diff_assoc', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_diff_assoc($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -145,7 +148,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function diffKey(...$array)
 	{
-		$this->array = call_user_func_array('array_diff_assoc', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_diff_key($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -158,7 +161,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	public function diffUassoc($callback, ...$array)
 	{
 		self::checkCallback($callback);
-		$this->array = call_user_func_array('array_diff_assoc', array_merge([$this->array], self::convertMoreToArray($array), [$callback]));
+		$this->array = array_diff_uassoc($this->array, ...array_merge(self::convertMoreToArray($array), [$callback]));
 		return $this;
 	}
 
@@ -169,7 +172,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function diff(...$array)
 	{
-		$this->array = call_user_func_array('array_diff_assoc', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_diff($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -205,7 +208,6 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function filter($callback = NULL, $flags = 0)
 	{
-		print_r($callback);
 		self::checkCallback($callback, TRUE);
 		$callback = $callback ?: function ($item) {
 			return (bool) $item;
@@ -978,20 +980,6 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	private static function convertToSelf($array)
 	{
 		return new ArrayClass($array);
-	}
-
-
-	/**
-	 * @param array|Traversable|ArrayClass $array
-	 * @return ArrayClass[]
-	 */
-	private static function convertMoreToSelf($array)
-	{
-		$result = [];
-		foreach ($array as $key => $value) {
-			$result[$key] = self::convertToSelf($value);
-		}
-		return $result;
 	}
 
 

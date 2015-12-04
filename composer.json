@@ -12,6 +12,9 @@
     "require": {
 
     },
+    "require-dev": {
+        "nette/tester": "dev-master#95012e73d74ffaf093b4e0532c6a12a5f00eab39 as v1.6.1"
+    },
 	"autoload": {
 		"psr-4": {
 			"greeny\\ArrayClass\\": "src/"
