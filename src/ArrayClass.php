@@ -233,7 +233,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function intersectAssoc(...$array)
 	{
-		$this->array = call_user_func_array('array_intersect_assoc', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_intersect_assoc($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -244,7 +244,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function intersectKey(...$array)
 	{
-		$this->array = call_user_func_array('array_intersect_key', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_intersect_key($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -257,7 +257,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	public function intersectUassoc($callback, ...$array)
 	{
 		self::checkCallback($callback);
-		$this->array = call_user_func_array('array_intersect_uassoc', array_merge([$this->array], self::convertMoreToArray($array), [$callback]));
+		$this->array = array_intersect_uassoc($this->array, ...array_merge(self::convertMoreToArray($array), [$callback]));
 		return $this;
 	}
 
@@ -270,7 +270,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	public function intersectUkey($callback, ...$array)
 	{
 		self::checkCallback($callback);
-		$this->array = call_user_func_array('array_intersect_ukey', array_merge([$this->array], self::convertMoreToArray($array), [$callback]));
+		$this->array = array_intersect_ukey($this->array, ...array_merge(self::convertMoreToArray($array), [$callback]));
 		return $this;
 	}
 
@@ -281,7 +281,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function intersect(...$array)
 	{
-		$this->array = call_user_func_array('array_intersect', array_merge([$this->array], self::convertMoreToArray($array)));
+		$this->array = array_intersect($this->array, ...self::convertMoreToArray($array));
 		return $this;
 	}
 
@@ -292,18 +292,19 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function keyExists($key)
 	{
-		return array_key_exists($this->array, $key);
+		return array_key_exists($key, $this->array);
 	}
 
 
 	/**
 	 * @param mixed $search
 	 * @param bool $strict
-	 * @return ArrayClass
+	 * @return $this
 	 */
 	public function keys($search = NULL, $strict = TRUE)
 	{
-		return self::convertToSelf(array_keys($this->array, $search, $strict));
+		$this->array = array_keys($this->array, $search, $strict);
+		return $this;
 	}
 
 
@@ -398,14 +399,15 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 
 	/**
 	 * @param int $num
-	 * @return ArrayClass
+	 * @return $this
 	 */
 	public function rand($num = 1)
 	{
 		if ($num > count($this->array)) {
 			return self::convertToSelf($this->array);
 		}
-		return self::convertToSelf(array_rand($this->array, $num));
+		$this->array = array_rand($this->array, $num);
+		return $this;
 	}
 
 
