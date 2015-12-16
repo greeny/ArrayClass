@@ -1,7 +1,4 @@
 <?php
-/**
- * TEST: ArrayClass::changeKeyCase
- */
 
 require_once __DIR__ . "/../bootstrap.php";
 

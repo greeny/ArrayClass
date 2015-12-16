@@ -64,9 +64,10 @@ So you do think it's everything I have for you? Wrong! Look at all these cool fe
 - bigger array-like support: every method that works with plain arrays can also accept `ArrayClass` or object implementing `Traversable`
 - cloning using `$arrayClass->cloneArray()` to return fresh clone or `$arrayClass->cloneRef($original)` to save original one and return clone
 - automatic callback checking, throws exception when passed callback is not callable
-- nice and easy readable API with fluent interface
+- nice and easily readable API with fluent interface
 - conversion to plain array with `toArray()` method
 - object access (`$arrayClass->foo` is same as `$arrayClass['foo']`)
+- unit tests
 - and much more!
 
 ## So what are you waiting for?
@@ -99,9 +100,8 @@ $array = ArrayClass::from($original); // same as before, good for chaining metho
 $array = ArrayClass::from($original)->filter()->shuffle(); // etc etc
 ```
 
-## Comming soon (maybe)
+## Future development
 
-- unit tests (there **may** (but **should not**) be some not yet discovered bugs)
 - any ideas? Let me know by opening an issue!
 
 ## Method index
@@ -130,7 +130,7 @@ If yes, only the name of wrapped PHP function is included, parameters are the sa
 - `map` (`$callback, ...$array`) = `array_map`
 - `mergeRecursive` (`...$array`) = `array_merge_recursive`
 - `merge` (`...$array`) = `array_merge`
-- `multisort` (`$order = SORT_ASC, $flags = SORT_REGULAR, ...$args`) = `array_multisort`
+- `multisort` (`$order = SORT_ASC, $flags = SORT_REGULAR`) = `array_multisort`
 - `pad` (`$size, $value`) = `array_pad`
 - `pop` = `array_pop`
 - `product` = `array_product`

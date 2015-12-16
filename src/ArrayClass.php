@@ -344,14 +344,12 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 
 
 	/**
-	 * @param int $order
-	 * @param int $flags
-	 * @param mixed ...$args
+	 * @param array ...$flags
 	 * @return $this
 	 */
-	public function multisort($order = SORT_ASC, $flags = SORT_REGULAR, ...$args)
+	public function multisort(...$flags)
 	{
-		array_multisort($this->array, $order, $flags, ...$args);
+		array_multisort($this->array, ...$flags);
 		return $this;
 	}
 
@@ -387,7 +385,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 
 
 	/**
-	 * @param array|Traversable|ArrayClass ...$values
+	 * @param array ...$values
 	 * @return $this
 	 */
 	public function push(...$values)
@@ -403,9 +401,6 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 	 */
 	public function rand($num = 1)
 	{
-		if ($num > count($this->array)) {
-			return self::convertToSelf($this->array);
-		}
 		$this->array = array_rand($this->array, $num);
 		return $this;
 	}
@@ -605,7 +600,7 @@ class ArrayClass implements IteratorAggregate, Countable, ArrayAccess
 
 
 	/**
-	 * @param array|Traversable|ArrayClass ...$value
+	 * @param array ...$value
 	 * @return $this
 	 */
 	public function unshift(...$value)
